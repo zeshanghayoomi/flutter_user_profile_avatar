@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ui_toolkit/conditional_child.dart';
+import 'conditional_child.dart';
 
 class ActivityIndicator extends StatelessWidget {
   final bool isSmall;

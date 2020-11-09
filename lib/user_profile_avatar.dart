@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'activity_Indicator.dart';
 import 'constants/constants.dart';
 import 'extensions/string_utils.dart';
 import 'models/avatar_border_data.dart';
+import 'ui_toolkit/activity_Indicator.dart';
 import 'ui_toolkit/conditional_child.dart';
 
 class UserProfileAvatar extends StatelessWidget {
