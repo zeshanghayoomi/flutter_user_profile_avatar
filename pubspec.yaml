@@ -21,5 +21,5 @@ dev_dependencies:
 flutter:
 
   assets:
-    - packages/flutter_user_profile_avatar/assets/icons/
+    - packages/user_profile_avatar/local/icons/user_empty_avatar.png
 

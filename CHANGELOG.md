@@ -1,3 +1,8 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.2] - 09 / 11 / 2020.
 
-* TODO: I will update this section at a later date.
+* Fixes issues with assets.
+
+
+## [0.0.1] - 09 / 11 / 2020.
+
+* Initial plugin release.
