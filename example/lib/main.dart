@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: HomePage(),
       ),
@@ -21,10 +22,27 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: UserProfileAvatar(
-        radius: 0,
-        notificationCount: 1,
-        avatarUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/f/ff/Pizigani_1367_Chart_10MB.jpg',
+        avatarUrl: 'https://picsum.photos/id/237/5000/5000',
+        onAvatarTap: () {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Tapped on avatar'),
+            ),
+          );
+        },
+        notificationCount: 10,
+        notificationBubbleTextStyle: TextStyle(
+          fontSize: 30,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        avatarSplashColor: Colors.purple,
+        radius: 100,
+        isActivityIndicatorSmall: false,
+        avatarBorderData: AvatarBorderData(
+          borderColor: Colors.black54,
+          borderWidth: 5.0,
+        ),
       ),
     );
   }
