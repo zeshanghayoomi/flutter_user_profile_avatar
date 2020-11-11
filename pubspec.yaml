@@ -1,6 +1,6 @@
 name: user_profile_avatar
-description: A simple widget that display round profile picture.
-version: 0.0.5
+description: A simple widget that display round profile picture and display native circular progress indicator whilst image is being fetched.
+version: 0.0.6
 homepage: https://github.com/zeshanghayoomi/flutter_user_profile_avatar
 
 environment:

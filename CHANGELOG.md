@@ -1,3 +1,7 @@
+## [0.0.6] - 10 / 11 / 2020.
+
+* Fixes images and gifs on pub.dev
+
 ## [0.0.5] - 10 / 11 / 2020.
 
 * adds correction to assets uri
