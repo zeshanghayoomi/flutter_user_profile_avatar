@@ -7,7 +7,7 @@ import 'package:user_profile_avatar/src/models/avatar_border_data.dart';
 import 'package:user_profile_avatar/src/ui_toolkit/activity_Indicator.dart';
 import 'package:user_profile_avatar/src/ui_toolkit/conditional_child.dart';
 
-class UserProfileAvatar extends StatelessWidget {
+class UserProfileAvatar extends StatefulWidget {
   final Key _key;
   final String _avatarUrl;
   final Function _onAvatarTap;
@@ -19,14 +19,7 @@ class UserProfileAvatar extends StatelessWidget {
   final bool _isActivityIndicatorSmall;
   final Color _activityIndicatorAndroidColor;
 
-  static const _inkwellCustomBorder = const CircleBorder();
-  static const _notificationBubbleTextStyle = TextStyle(
-    color: Colors.white,
-    fontSize: 9,
-    fontWeight: FontWeight.bold,
-  );
-
-  const UserProfileAvatar(
+  UserProfileAvatar(
       {Key key,
       @required String avatarUrl,
       Function onAvatarTap,
@@ -49,18 +42,60 @@ class UserProfileAvatar extends StatelessWidget {
         _activityIndicatorAndroidColor = activityIndicatorAndroidColor;
 
   @override
+  _UserProfileAvatarState createState() => _UserProfileAvatarState();
+}
+
+class _UserProfileAvatarState extends State<UserProfileAvatar>
+    with SingleTickerProviderStateMixin {
+  final _inkwellCustomBorder = CircleBorder();
+  final _notificationBubbleTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 9,
+    fontWeight: FontWeight.bold,
+  );
+  final _duration = Duration(milliseconds: 500);
+
+  AnimationController _controller;
+  Animation _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: _duration,
+    );
+
+    _animation = CurvedAnimation(
+      curve: Curves.bounceOut,
+      parent: _controller,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final mainContainerSize = _radius * 2;
-    final notificationBubbleSize = (_radius / 100) * 70;
+    if (!_controller.isAnimating) {
+      _controller.forward(from: 0.0);
+    }
+
+    final mainContainerSize = widget._radius * 2;
+    final notificationBubbleSize = (widget._radius / 100) * 70;
     final mainContainerMinSize = 30.0;
     final mainContainerMaxSize = 300.0;
     final notificationBubbleMinSize = 20.0;
     final notificationBubbleMaxSize = 80.0;
 
     return InkWell(
-      onTap: _onAvatarTap,
+      onTap: widget._onAvatarTap,
       customBorder: _inkwellCustomBorder,
-      splashColor: _avatarSplashColor,
+      splashColor: widget._avatarSplashColor,
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Container(
@@ -76,10 +111,10 @@ class UserProfileAvatar extends StatelessWidget {
             children: [
               Center(
                 child: ConditionalChild(
-                  condition: isNullOrEmpty(_avatarUrl),
+                  condition: isNullOrEmpty(widget._avatarUrl),
                   thenBuilder: () => Container(
-                    height: _radius * 2,
-                    width: _radius * 2,
+                    height: widget._radius * 2,
+                    width: widget._radius * 2,
                     constraints: BoxConstraints(
                       minWidth: mainContainerMinSize,
                       minHeight: mainContainerMinSize,
@@ -90,11 +125,11 @@ class UserProfileAvatar extends StatelessWidget {
                     ),
                   ),
                   elseBuilder: () => CachedNetworkImage(
-                    key: _key,
-                    imageUrl: _avatarUrl,
+                    key: widget._key,
+                    imageUrl: widget._avatarUrl,
                     imageBuilder: (context, imageProvider) => Container(
-                      height: _radius * 2,
-                      width: _radius * 2,
+                      height: widget._radius * 2,
+                      width: widget._radius * 2,
                       constraints: BoxConstraints(
                         minWidth: mainContainerMinSize,
                         minHeight: mainContainerMinSize,
@@ -106,19 +141,19 @@ class UserProfileAvatar extends StatelessWidget {
                         ),
                         color: Colors.black26,
                         shape: BoxShape.circle,
-                        border: _avatarBorderData != null
+                        border: widget._avatarBorderData != null
                             ? Border.all(
-                                color: _avatarBorderData.borderColor,
-                                width: _avatarBorderData.borderWidth > 10
+                                color: widget._avatarBorderData.borderColor,
+                                width: widget._avatarBorderData.borderWidth > 10
                                     ? 10
-                                    : _avatarBorderData.borderWidth,
+                                    : widget._avatarBorderData.borderWidth,
                               )
                             : null,
                       ),
                     ),
                     placeholder: (_, __) => ActivityIndicator(
-                      isSmall: _isActivityIndicatorSmall,
-                      androidColor: _activityIndicatorAndroidColor,
+                      isSmall: widget._isActivityIndicatorSmall,
+                      androidColor: widget._activityIndicatorAndroidColor,
                     ),
                     errorWidget: (_, __, ___) => Icon(
                       Icons.error,
@@ -133,30 +168,30 @@ class UserProfileAvatar extends StatelessWidget {
                 ),
               ),
               ConditionalChild(
-                condition: (_notificationCount ?? 0) > 0,
+                condition: (widget._notificationCount ?? 0) > 0,
                 thenBuilder: () => Align(
                   alignment: Alignment.topRight,
-                  child: Container(
-                    height: notificationBubbleSize,
-                    width: notificationBubbleSize,
-                    constraints: BoxConstraints(
-                      minWidth: notificationBubbleMinSize,
-                      minHeight: notificationBubbleMinSize,
-                      maxWidth: notificationBubbleMaxSize,
-                      maxHeight: notificationBubbleMaxSize,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0.0),
+                  child: ScaleTransition(
+                    scale: _animation,
+                    child: Container(
+                      height: notificationBubbleSize,
+                      width: notificationBubbleSize,
+                      constraints: BoxConstraints(
+                        minWidth: notificationBubbleMinSize,
+                        minHeight: notificationBubbleMinSize,
+                        maxWidth: notificationBubbleMaxSize,
+                        maxHeight: notificationBubbleMaxSize,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
                         child: Text(
-                          _notificationCount > 99
+                          widget._notificationCount > 99
                               ? '99+'
-                              : '$_notificationCount',
-                          style: _notificationCountTextStyle ??
+                              : '${widget._notificationCount}',
+                          style: widget._notificationCountTextStyle ??
                               _notificationBubbleTextStyle,
                         ),
                       ),
