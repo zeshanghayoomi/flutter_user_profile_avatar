@@ -1,3 +1,11 @@
+## [0.0.5] - 10 / 11 / 2020.
+
+* adds correction to assets uri
+
+## [0.0.4] - 10 / 11 / 2020.
+
+* updates example project and includes read me
+
 ## [0.0.3] - 09 / 11 / 2020.
 
 * includes example project skeleton

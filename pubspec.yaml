@@ -1,6 +1,6 @@
 name: user_profile_avatar
 description: A simple widget that display round profile picture.
-version: 0.0.3
+version: 0.0.5
 homepage: https://github.com/zeshanghayoomi/flutter_user_profile_avatar
 
 environment:
