@@ -1,3 +1,7 @@
+## [0.0.8] - 11 / 11 / 2020.
+
+* Bug fix for notification counter animation.
+
 ## [0.0.7] - 10 / 11 / 2020.
 
 * Adds animation when notification value changes.

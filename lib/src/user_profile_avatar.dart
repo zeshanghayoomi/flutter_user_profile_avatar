@@ -54,6 +54,7 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
     fontWeight: FontWeight.bold,
   );
   final _duration = Duration(milliseconds: 500);
+  int _tempNotificationCount;
 
   AnimationController _controller;
   Animation _animation;
@@ -81,10 +82,7 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
 
   @override
   Widget build(BuildContext context) {
-    if (!_controller.isAnimating) {
-      _controller.forward(from: 0.0);
-    }
-
+    _startNotificationCounterAnimation();
     final mainContainerSize = widget._radius * 2;
     final notificationBubbleSize = (widget._radius / 100) * 70;
     final mainContainerMinSize = 30.0;
@@ -204,5 +202,14 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
         ),
       ),
     );
+  }
+
+  void _startNotificationCounterAnimation() {
+    if ((widget._notificationCount ?? 0) > 0 &&
+        widget._notificationCount != _tempNotificationCount &&
+        !_controller.isAnimating) {
+      _tempNotificationCount = widget._notificationCount;
+      _controller.forward(from: 0.0);
+    }
   }
 }
