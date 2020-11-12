@@ -19,6 +19,15 @@ class UserProfileAvatar extends StatefulWidget {
   final bool _isActivityIndicatorSmall;
   final Color _activityIndicatorAndroidColor;
 
+  /// [avatarUrl] the uri for the image to be displayed.
+  /// [onAvatarTap] called when user taps on the avatar.
+  /// [avatarBorderData] used to style the border of the circle.
+  /// [avatarSplashColor] the splash color when avatar is tapped.
+  /// [radius] avatar radius where min = 15 and max = 150.
+  /// [notificationCount] to display notificaiton count, passing 0 or null hides the notification bubble.
+  /// [notificationBubbleTextStyle] used to style the notification bubble value,
+  /// [isActivityIndicatorSmall] displays native circular progress indicator when image is being loaded, use this to set the desired size.
+  /// [activityIndicatorAndroidColor] used to set the color for circular progress indicator, only on android.
   UserProfileAvatar(
       {Key key,
       @required String avatarUrl,
