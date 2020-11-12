@@ -1,3 +1,7 @@
+## [0.0.9] - 11 / 11 / 2020.
+
+* Updates asset and adds docs.
+
 ## [0.0.8] - 11 / 11 / 2020.
 
 * Bug fix for notification counter animation.
