@@ -1,3 +1,7 @@
+## [0.0.10] - 10 / 05 / 2021.
+
+* Updates dependency
+
 ## [0.0.9] - 11 / 11 / 2020.
 
 * Updates asset and adds docs.
