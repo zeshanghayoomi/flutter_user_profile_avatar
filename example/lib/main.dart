@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
       child: UserProfileAvatar(
         avatarUrl: 'https://picsum.photos/id/237/5000/5000',
         onAvatarTap: () {
-          Scaffold.of(context).showSnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Tapped on avatar'),
             ),
