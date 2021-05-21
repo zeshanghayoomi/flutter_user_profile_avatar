@@ -1,3 +1,7 @@
+## [0.1.0] - 22 / 05 / 2021.
+
+* Migrates to null safety
+
 ## [0.0.10] - 10 / 05 / 2021.
 
 * Updates dependency
