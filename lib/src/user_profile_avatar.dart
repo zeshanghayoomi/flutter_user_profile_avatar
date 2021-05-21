@@ -8,16 +8,16 @@ import 'package:user_profile_avatar/src/ui_toolkit/activity_Indicator.dart';
 import 'package:user_profile_avatar/src/ui_toolkit/conditional_child.dart';
 
 class UserProfileAvatar extends StatefulWidget {
-  final Key _key;
-  final String _avatarUrl;
-  final Function _onAvatarTap;
-  final AvatarBorderData _avatarBorderData;
-  final Color _avatarSplashColor;
+  final Key? _key;
+  final String? _avatarUrl;
+  final Function? _onAvatarTap;
+  final AvatarBorderData? _avatarBorderData;
+  final Color? _avatarSplashColor;
   final double _radius;
-  final int _notificationCount;
-  final TextStyle _notificationCountTextStyle;
+  final int? _notificationCount;
+  final TextStyle? _notificationCountTextStyle;
   final bool _isActivityIndicatorSmall;
-  final Color _activityIndicatorAndroidColor;
+  final Color? _activityIndicatorAndroidColor;
 
   /// [avatarUrl] the uri for the image to be displayed.
   /// [onAvatarTap] called when user taps on the avatar.
@@ -29,16 +29,16 @@ class UserProfileAvatar extends StatefulWidget {
   /// [isActivityIndicatorSmall] displays native circular progress indicator when image is being loaded, use this to set the desired size.
   /// [activityIndicatorAndroidColor] used to set the color for circular progress indicator, only on android.
   UserProfileAvatar(
-      {Key key,
-      @required String avatarUrl,
-      Function onAvatarTap,
-      AvatarBorderData avatarBorderData,
-      Color avatarSplashColor,
+      {Key? key,
+      required String avatarUrl,
+      Function? onAvatarTap,
+      AvatarBorderData? avatarBorderData,
+      Color? avatarSplashColor,
       double radius = 15.0,
-      int notificationCount,
-      TextStyle notificationBubbleTextStyle,
+      int? notificationCount,
+      TextStyle? notificationBubbleTextStyle,
       bool isActivityIndicatorSmall = true,
-      Color activityIndicatorAndroidColor})
+      Color? activityIndicatorAndroidColor})
       : _key = key,
         _avatarUrl = avatarUrl,
         _onAvatarTap = onAvatarTap,
@@ -63,10 +63,10 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
     fontWeight: FontWeight.bold,
   );
   final _duration = Duration(milliseconds: 500);
-  int _tempNotificationCount;
+  int? _tempNotificationCount;
 
-  AnimationController _controller;
-  Animation _animation;
+  late AnimationController _controller;
+  late Animation _animation;
 
   @override
   void initState() {
@@ -100,7 +100,7 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
     final notificationBubbleMaxSize = 80.0;
 
     return InkWell(
-      onTap: widget._onAvatarTap,
+      onTap: () => widget._onAvatarTap?.call(),
       customBorder: _inkwellCustomBorder,
       splashColor: widget._avatarSplashColor,
       child: Padding(
@@ -133,7 +133,7 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
                   ),
                   elseBuilder: () => CachedNetworkImage(
                     key: widget._key,
-                    imageUrl: widget._avatarUrl,
+                    imageUrl: widget._avatarUrl!,
                     imageBuilder: (context, imageProvider) => Container(
                       height: widget._radius * 2,
                       width: widget._radius * 2,
@@ -150,10 +150,11 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
                         shape: BoxShape.circle,
                         border: widget._avatarBorderData != null
                             ? Border.all(
-                                color: widget._avatarBorderData.borderColor,
-                                width: widget._avatarBorderData.borderWidth > 10
-                                    ? 10
-                                    : widget._avatarBorderData.borderWidth,
+                                color: widget._avatarBorderData!.borderColor,
+                                width:
+                                    widget._avatarBorderData!.borderWidth > 10
+                                        ? 10
+                                        : widget._avatarBorderData!.borderWidth,
                               )
                             : null,
                       ),
@@ -179,7 +180,7 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
                 thenBuilder: () => Align(
                   alignment: Alignment.topRight,
                   child: ScaleTransition(
-                    scale: _animation,
+                    scale: _animation as Animation<double>,
                     child: Container(
                       height: notificationBubbleSize,
                       width: notificationBubbleSize,
@@ -195,7 +196,7 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
                       ),
                       child: Center(
                         child: Text(
-                          widget._notificationCount > 99
+                          widget._notificationCount! > 99
                               ? '99+'
                               : '${widget._notificationCount}',
                           style: widget._notificationCountTextStyle ??

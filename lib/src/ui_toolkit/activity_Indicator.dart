@@ -7,7 +7,7 @@ import 'conditional_child.dart';
 
 class ActivityIndicator extends StatelessWidget {
   final bool isSmall;
-  final Color androidColor;
+  final Color? androidColor;
 
   double get _size {
     return isSmall ? 8 : 16;
