@@ -25,13 +25,13 @@ class HomePage extends StatelessWidget {
         avatarUrl: 'https://picsum.photos/id/237/5000/5000',
         onAvatarTap: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Tapped on avatar'),
             ),
           );
         },
         notificationCount: 10,
-        notificationBubbleTextStyle: TextStyle(
+        notificationBubbleTextStyle: const TextStyle(
           fontSize: 30,
           color: Colors.white,
           fontWeight: FontWeight.bold,
