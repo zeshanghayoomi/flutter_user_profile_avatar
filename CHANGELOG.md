@@ -1,3 +1,7 @@
+## [0.1.2] - 14 / 12 / 2022.
+
+* Adds flutter 3.0.0 support
+
 ## [0.1.1] - 30 / 05 / 2022.
 
 * Adds flutter 3.0.0 support
