@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:user_profile_avatar/src/constants/constants.dart';
 import 'package:user_profile_avatar/src/extensions/string_utils.dart';
@@ -24,7 +23,7 @@ class UserProfileAvatar extends StatefulWidget {
   /// [avatarBorderData] used to style the border of the circle.
   /// [avatarSplashColor] the splash color when avatar is tapped.
   /// [radius] avatar radius where min = 15 and max = 150.
-  /// [notificationCount] to display notificaiton count, passing 0 or null hides the notification bubble.
+  /// [notificationCount] to display notification count, passing 0 or null hides the notification bubble.
   /// [notificationBubbleTextStyle] used to style the notification bubble value,
   /// [isActivityIndicatorSmall] displays native circular progress indicator when image is being loaded, use this to set the desired size.
   /// [activityIndicatorAndroidColor] used to set the color for circular progress indicator, only on android.
@@ -54,8 +53,7 @@ class UserProfileAvatar extends StatefulWidget {
   _UserProfileAvatarState createState() => _UserProfileAvatarState();
 }
 
-class _UserProfileAvatarState extends State<UserProfileAvatar>
-    with SingleTickerProviderStateMixin {
+class _UserProfileAvatarState extends State<UserProfileAvatar> with SingleTickerProviderStateMixin {
   final _inkwellCustomBorder = CircleBorder();
   final _notificationBubbleTextStyle = TextStyle(
     color: Colors.white,
@@ -151,10 +149,9 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
                         border: widget._avatarBorderData != null
                             ? Border.all(
                                 color: widget._avatarBorderData!.borderColor,
-                                width:
-                                    widget._avatarBorderData!.borderWidth > 10
-                                        ? 10
-                                        : widget._avatarBorderData!.borderWidth,
+                                width: widget._avatarBorderData!.borderWidth > 10
+                                    ? 10
+                                    : widget._avatarBorderData!.borderWidth,
                               )
                             : null,
                       ),
@@ -196,11 +193,8 @@ class _UserProfileAvatarState extends State<UserProfileAvatar>
                       ),
                       child: Center(
                         child: Text(
-                          widget._notificationCount! > 99
-                              ? '99+'
-                              : '${widget._notificationCount}',
-                          style: widget._notificationCountTextStyle ??
-                              _notificationBubbleTextStyle,
+                          widget._notificationCount! > 99 ? '99+' : '${widget._notificationCount}',
+                          style: widget._notificationCountTextStyle ?? _notificationBubbleTextStyle,
                         ),
                       ),
                     ),
